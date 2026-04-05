@@ -209,3 +209,113 @@ export const currentUser = {
   points: 1_250,
   role: "AI Champion",
 };
+
+// ── AI Workflow Templates (업무별 AI 활용 가이드) ─────────────
+export interface WorkflowTemplate {
+  id: string;
+  job: string;
+  icon: string;
+  color: string;
+  borderColor: string;
+  bgGradient: string;
+  description: string;
+  workflows: {
+    task: string;
+    tool: string;
+    savedMin: number;
+    difficulty: "초급" | "중급" | "고급";
+  }[];
+}
+
+export const workflowTemplates: WorkflowTemplate[] = [
+  {
+    id: "wt1",
+    job: "영업",
+    icon: "💼",
+    color: "text-blue-700",
+    borderColor: "border-blue-200",
+    bgGradient: "from-blue-50 to-sky-50",
+    description: "고객 응대부터 제안서까지, AI로 영업 사이클을 단축하세요.",
+    workflows: [
+      { task: "고객사 사전 리서치", tool: "Perplexity", savedMin: 45, difficulty: "초급" },
+      { task: "제안서 초안 작성", tool: "Claude", savedMin: 120, difficulty: "중급" },
+      { task: "미팅 후 회의록 정리", tool: "ChatGPT", savedMin: 30, difficulty: "초급" },
+      { task: "RFP 응답서 작성", tool: "Claude", savedMin: 180, difficulty: "고급" },
+    ],
+  },
+  {
+    id: "wt2",
+    job: "마케팅",
+    icon: "📣",
+    color: "text-rose-700",
+    borderColor: "border-rose-200",
+    bgGradient: "from-rose-50 to-pink-50",
+    description: "콘텐츠 기획부터 성과 분석까지, 마케팅 전 과정을 AI로 가속하세요.",
+    workflows: [
+      { task: "광고 카피 A/B 시안", tool: "ChatGPT", savedMin: 60, difficulty: "초급" },
+      { task: "블로그 포스트 초안", tool: "Claude", savedMin: 90, difficulty: "중급" },
+      { task: "경쟁사 SNS 벤치마킹", tool: "Perplexity", savedMin: 40, difficulty: "초급" },
+      { task: "캠페인 성과 리포트", tool: "Claude", savedMin: 75, difficulty: "중급" },
+    ],
+  },
+  {
+    id: "wt3",
+    job: "개발",
+    icon: "💻",
+    color: "text-emerald-700",
+    borderColor: "border-emerald-200",
+    bgGradient: "from-emerald-50 to-teal-50",
+    description: "코드 리뷰, 테스트, 문서화까지 개발 생산성을 극대화하세요.",
+    workflows: [
+      { task: "코드 리뷰 체크리스트", tool: "Claude", savedMin: 30, difficulty: "초급" },
+      { task: "테스트 케이스 자동 생성", tool: "Claude", savedMin: 60, difficulty: "중급" },
+      { task: "API 문서 작성", tool: "ChatGPT", savedMin: 45, difficulty: "중급" },
+      { task: "버그 원인 분석", tool: "Claude", savedMin: 25, difficulty: "초급" },
+    ],
+  },
+  {
+    id: "wt4",
+    job: "기획",
+    icon: "📊",
+    color: "text-amber-700",
+    borderColor: "border-amber-200",
+    bgGradient: "from-amber-50 to-yellow-50",
+    description: "시장 조사, 보고서, 전략 수립을 AI로 체계적으로 수행하세요.",
+    workflows: [
+      { task: "경쟁사 동향 리서치", tool: "Perplexity", savedMin: 90, difficulty: "초급" },
+      { task: "주간 업무 보고서", tool: "Claude", savedMin: 45, difficulty: "초급" },
+      { task: "사업계획서 초안", tool: "Claude", savedMin: 150, difficulty: "고급" },
+      { task: "데이터 인사이트 도출", tool: "ChatGPT", savedMin: 60, difficulty: "중급" },
+    ],
+  },
+  {
+    id: "wt5",
+    job: "HR",
+    icon: "🤝",
+    color: "text-violet-700",
+    borderColor: "border-violet-200",
+    bgGradient: "from-violet-50 to-purple-50",
+    description: "채용, 온보딩, 교육 등 인사 업무를 AI로 효율화하세요.",
+    workflows: [
+      { task: "면접 질문 생성", tool: "Claude", savedMin: 40, difficulty: "초급" },
+      { task: "온보딩 가이드 제작", tool: "ChatGPT", savedMin: 60, difficulty: "중급" },
+      { task: "JD 작성 및 최적화", tool: "Claude", savedMin: 30, difficulty: "초급" },
+      { task: "교육 커리큘럼 설계", tool: "Claude", savedMin: 90, difficulty: "고급" },
+    ],
+  },
+  {
+    id: "wt6",
+    job: "CS",
+    icon: "🎧",
+    color: "text-cyan-700",
+    borderColor: "border-cyan-200",
+    bgGradient: "from-cyan-50 to-sky-50",
+    description: "고객 문의 분석부터 응대 스크립트까지, CS 품질을 높이세요.",
+    workflows: [
+      { task: "VOC 감성 분석·분류", tool: "ChatGPT", savedMin: 50, difficulty: "중급" },
+      { task: "FAQ 응답 초안 작성", tool: "Claude", savedMin: 25, difficulty: "초급" },
+      { task: "에스컬레이션 판단", tool: "Claude", savedMin: 15, difficulty: "초급" },
+      { task: "CS 품질 리포트", tool: "ChatGPT", savedMin: 40, difficulty: "중급" },
+    ],
+  },
+];

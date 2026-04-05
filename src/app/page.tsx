@@ -2,6 +2,7 @@ import {
   dashboardStats,
   prompts,
   useCases,
+  workflowTemplates,
 } from "@/lib/mockData";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -17,6 +18,8 @@ import {
   Trophy,
   Timer,
   Zap,
+  Compass,
+  ChevronRight,
 } from "lucide-react";
 
 // ── AI Tool badge color ──────────────────────────────────────
@@ -400,7 +403,108 @@ export default function DashboardPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          5. 월별 절감 시간 추이 차트
+          5. 업무별 AI 플레이북
+          ═══════════════════════════════════════════════════ */}
+      <section>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Compass className="h-4 w-4 text-indigo-500" />
+            <h2 className="text-base font-bold text-slate-900">
+              업무별 AI 플레이북
+            </h2>
+            <span className="rounded-md bg-indigo-50 px-2 py-0.5 text-[10px] font-bold text-indigo-600 border border-indigo-200 uppercase tracking-wide">
+              Quick Start
+            </span>
+          </div>
+          <p className="text-xs text-slate-400">
+            내 직무를 선택하면 바로 적용 가능한 AI 워크플로우를 확인할 수 있어요
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {workflowTemplates.map((wt) => {
+            const totalMin = wt.workflows.reduce((s, w) => s + w.savedMin, 0);
+            const totalHours = (totalMin / 60).toFixed(1);
+            return (
+              <div
+                key={wt.id}
+                className={`group flex flex-col rounded-xl border ${wt.borderColor} bg-gradient-to-br ${wt.bgGradient} shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg overflow-hidden`}
+              >
+                {/* Header */}
+                <div className="px-5 pt-5 pb-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-2xl">{wt.icon}</span>
+                      <div>
+                        <h3 className={`text-base font-extrabold ${wt.color}`}>
+                          {wt.job}
+                        </h3>
+                        <p className="text-[11px] text-slate-500 mt-0.5">
+                          {wt.workflows.length}개 워크플로우
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-lg font-black text-emerald-600">
+                        {totalHours}h
+                      </p>
+                      <p className="text-[10px] text-slate-400">예상 절감</p>
+                    </div>
+                  </div>
+                  <p className="mt-2 text-xs text-slate-500 leading-relaxed">
+                    {wt.description}
+                  </p>
+                </div>
+
+                {/* Workflow list */}
+                <div className="flex-1 px-5 pb-2">
+                  <div className="space-y-1.5">
+                    {wt.workflows.map((w, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-2 rounded-lg bg-white/70 backdrop-blur-sm px-3 py-2 border border-white/80"
+                      >
+                        <span className="flex h-5 w-5 items-center justify-center rounded text-[10px] font-bold bg-white text-slate-400 border border-slate-200 shrink-0">
+                          {i + 1}
+                        </span>
+                        <span className="flex-1 text-xs font-medium text-slate-700 truncate">
+                          {w.task}
+                        </span>
+                        <span className={`rounded px-1.5 py-0.5 text-[10px] font-semibold border ${
+                          w.difficulty === "초급"
+                            ? "bg-emerald-50 text-emerald-600 border-emerald-200"
+                            : w.difficulty === "중급"
+                            ? "bg-amber-50 text-amber-600 border-amber-200"
+                            : "bg-red-50 text-red-600 border-red-200"
+                        }`}>
+                          {w.difficulty}
+                        </span>
+                        <span className="text-[10px] font-semibold text-emerald-600 shrink-0 w-10 text-right">
+                          -{w.savedMin}분
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div className="border-t border-white/50 px-5 py-3 mt-2 bg-white/30">
+                  <a
+                    href="/prompts"
+                    className="flex items-center justify-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 transition"
+                  >
+                    관련 프롬프트 보기
+                    <ChevronRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════
+          6. 월별 절감 시간 추이 차트
           ═══════════════════════════════════════════════════ */}
       <section className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
         <div className="flex items-center gap-2 mb-5">
