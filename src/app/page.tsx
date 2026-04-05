@@ -62,7 +62,7 @@ export default function DashboardPage() {
         <div className="relative z-10 flex flex-col gap-1">
           <div className="flex items-center gap-2 text-blue-200 text-xs font-semibold tracking-wide uppercase">
             <Sparkles className="h-3.5 w-3.5" />
-            AI-X Hub · Enterprise AI Portal
+            AI-X Hub · 꿈비그룹 AI Portal
           </div>
           <h1 className="mt-2 text-[28px] font-extrabold leading-tight text-white tracking-tight">
             당신의 AI 노하우가<br />

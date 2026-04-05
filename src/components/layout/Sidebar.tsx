@@ -55,7 +55,7 @@ export default function Sidebar() {
             AI-X Hub
           </span>
           <span className="text-[10px] font-medium uppercase tracking-widest text-slate-400">
-            Enterprise AI Portal
+            꿈비그룹 AI Portal
           </span>
         </div>
       </div>
